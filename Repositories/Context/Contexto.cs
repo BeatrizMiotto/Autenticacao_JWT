@@ -12,7 +12,7 @@ public class Contexto : DbContext
         optionsBuilder.UseMySql(conexao, ServerVersion.AutoDetect(conexao));
     }
 
-    public DbSet<Adm> Adim { get; set; } = default!;
-    public DbSet<Cliente> Clientes { get; set; } = default!;
+    public DbSet<Cadastro> cadastro { get; set; } = default!;
+    public DbSet<Cliente> cliente { get; set; } = default!;
    
 }

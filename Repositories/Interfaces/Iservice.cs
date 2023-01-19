@@ -1,4 +1,3 @@
-using Autenticacao_JWT.Models;
 
 namespace Autenticacao_JWT.Repositories.Interfaces;
 

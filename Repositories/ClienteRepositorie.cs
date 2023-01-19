@@ -15,12 +15,12 @@ public class ClienteRepositorie : IService<Cliente>
 
     public async Task<List<Cliente>> TodosAsync()
     {
-        return await contexto.Clientes.ToListAsync();
+        return await contexto.cliente.ToListAsync();
     }
 
     public async Task IncluirAsync(Cliente cliente)
     {
-        contexto.Clientes.Add(cliente);
+        contexto.cliente.Add(cliente);
         await contexto.SaveChangesAsync();
     }
 
@@ -34,9 +34,9 @@ public class ClienteRepositorie : IService<Cliente>
 
     public async Task ApagarAsync(Cliente cliente)
     {
-        var obj = await contexto.Clientes.FindAsync(cliente.Id);
+        var obj = await contexto.cliente.FindAsync(cliente.Id);
         if (obj is null) throw new Exception("Cliente não encontrado.");
-        contexto.Clientes.Remove(obj);
+        contexto.cliente.Remove(obj);
         await contexto.SaveChangesAsync();
     }
 }

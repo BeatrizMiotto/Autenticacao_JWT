@@ -1,6 +1,6 @@
 namespace Autenticacao_JWT.Models;
 
-public record Adm
+public record Cadastro
 {
     public int Id {get; set;} = default!;
     public string Nome {get; set;} = default!;

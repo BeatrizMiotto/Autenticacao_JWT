@@ -1,10 +1,13 @@
 using Autenticacao_JWT.Models;
 using Autenticacao_JWT.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Autenticacao_JWT.Controllers;
 
 [Route("clientes")]
+[ApiController]
+
 public class ClientesController : ControllerBase
 {
     private IService<Cliente> _service;
@@ -14,7 +17,10 @@ public class ClientesController : ControllerBase
         _service = service;
     }
 
+  
     [HttpGet("")]
+    [Authorize(Roles = "adm,editor")]
+    
     public async Task<IActionResult> Index()
     {
         var clientes = await _service.TodosAsync();
@@ -22,6 +28,8 @@ public class ClientesController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "adm,editor")]
+   
     public async Task<IActionResult> Details([FromRoute] int id)
     {
         var cliente = (await _service.TodosAsync()).Find(c => c.Id == id);
@@ -30,6 +38,8 @@ public class ClientesController : ControllerBase
     }
 
     [HttpPost("")]
+    [Authorize(Roles = "adm")]
+  
     public async Task<IActionResult> Create([FromBody] Cliente cliente)
     {
         await _service.IncluirAsync(cliente);
@@ -37,6 +47,8 @@ public class ClientesController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "adm")]
+  
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Cliente cliente)
     {
         if (id != cliente.Id)
@@ -53,6 +65,8 @@ public class ClientesController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "adm")]
+  
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
         var clienteDb = (await _service.TodosAsync()).Find(c => c.Id == id);
